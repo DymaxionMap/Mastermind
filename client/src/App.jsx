@@ -6,10 +6,14 @@ class App extends Component {
     this.state = {
       title: '',
       words: [],
-      highlighted: '',
+      selection: {
+        text: '',
+        startId: null,
+        endId: null,
+      },
     };
 
-    this.getHighlighted = this.getHighlighted.bind(this);
+    this.getSelection = this.getSelection.bind(this);
   }
 
   componentDidMount() {
@@ -21,18 +25,41 @@ class App extends Component {
       });
   }
 
-  getHighlighted() {
+  getSelection() {
     const selection = window.getSelection();
-    this.setState({ highlighted: selection.toString() });
+    if (!selection.isCollapsed) {
+      console.log('Anchor node:');
+      console.log(selection.anchorNode.parentElement);
+      console.log('Focus node:');
+      console.log(selection.focusNode.parentElement);
+      this.setState({ selection: {
+        text: selection.toString(),
+        startId: selection.anchorNode.parentElement.id,
+        endId: selection.focusNode.parentElement.id,
+      } });
+    }
   }
 
   render() {
-    const { title, words, highlighted } = this.state;
+    const { title, words, selection } = this.state;
     return (
       <div>
-        <h2>{highlighted}</h2>
+        <h2>
+          Selected text:
+          {selection.text}
+        </h2>
+        <h2>
+          First node id:
+          {selection.startId}
+        </h2>
+        <h2>
+          Last node id:
+          {selection.endId}
+        </h2>
         <h1>{title}</h1>
-        <div onMouseUp={this.getHighlighted}>{words.map((word, i) => <span key={i}>{`${word} `}</span>)}</div>
+        <div onMouseUp={this.getSelection}>
+          {words.map(word => <span id={word.id} key={word.id}>{`${word.value} `}</span>)}
+        </div>
       </div>
     );
   }
