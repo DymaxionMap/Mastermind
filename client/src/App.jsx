@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Article from './components/Article';
 
 class App extends Component {
   constructor(props) {
@@ -43,24 +44,7 @@ class App extends Component {
   render() {
     const { title, words, selection } = this.state;
     return (
-      <div>
-        <h2>
-          Selected text:
-          {selection.text}
-        </h2>
-        <h2>
-          First node id:
-          {selection.startId}
-        </h2>
-        <h2>
-          Last node id:
-          {selection.endId}
-        </h2>
-        <h1>{title}</h1>
-        <div onMouseUp={this.getSelection}>
-          {words.map(word => <span id={word.id} key={word.id}>{`${word.value} `}</span>)}
-        </div>
-      </div>
+      <Article title={title} words={words} selection={selection} getSelection={this.getSelection} />
     );
   }
 }
