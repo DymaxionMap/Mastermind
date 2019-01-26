@@ -22,22 +22,32 @@ class App extends Component {
       .then(data => data.json())
       .then((article) => {
         const { title, words } = article;
-        this.setState({ title, words });
+        this.setState({
+          title,
+          words: words.map(word => Object.assign({ isSelected: false }, word)),
+        });
       });
   }
 
   getSelection() {
     const selection = window.getSelection();
     if (!selection.isCollapsed) {
-      console.log('Anchor node:');
-      console.log(selection.anchorNode.parentElement);
-      console.log('Focus node:');
-      console.log(selection.focusNode.parentElement);
-      this.setState({ selection: {
-        text: selection.toString(),
-        startId: selection.anchorNode.parentElement.id,
-        endId: selection.focusNode.parentElement.id,
-      } });
+      const { words } = this.state;
+      const startId = Number(selection.anchorNode.parentElement.id);
+      const endId = Number(selection.focusNode.parentElement.id);
+      const highlightedWords = words.map(word => (
+        (word.id >= startId && word.id <= endId)
+          ? { ...word, isSelected: true }
+          : { ...word }
+      ));
+      this.setState({
+        selection: {
+          startId,
+          endId,
+          text: selection.toString(),
+        },
+        words: highlightedWords,
+      });
     }
   }
 

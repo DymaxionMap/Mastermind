@@ -17,7 +17,9 @@ const Article = ({ title, words, selection, getSelection }) => (
     </h2>
     <h1>{title}</h1>
     <p onMouseUp={getSelection}>
-      {words.map(word => <Word id={word.id} value={word.value} key={word.id} />)}
+      {words.map(word => (
+        <Word id={word.id} value={word.value} key={word.id} isSelected={word.isSelected} />
+      ))}
     </p>
   </div>
 );
