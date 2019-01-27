@@ -2,6 +2,16 @@ import React, { Component } from 'react';
 import Article from './components/Article';
 import Discussion from './components/Discussion';
 
+const inBetween = (x, rangeStart, rangeEnd) => x >= rangeStart && x <= rangeEnd;
+
+const selectionOverlapsThread = (selectionStart, selectionEnd, threads) => (
+  threads.some(thread => (
+    inBetween(selectionStart, thread.start, thread.end)
+    || inBetween(selectionEnd, thread.start, thread.end)
+    || inBetween(thread.start, selectionStart, selectionEnd)
+  ))
+);
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -33,14 +43,16 @@ class App extends Component {
   getSelection() {
     const selection = window.getSelection();
     if (!selection.isCollapsed) {
-      const startId = Number(selection.anchorNode.parentElement.id);
-      const endId = Number(selection.focusNode.parentElement.id);
-      this.setState({
-        selection: {
-          startId: Math.min(startId, endId),
-          endId: Math.min(startId, endId),
-        },
-      });
+      const anchorId = Number(selection.anchorNode.parentElement.id);
+      const focusId = Number(selection.focusNode.parentElement.id);
+      const startId = Math.min(anchorId, focusId);
+      const endId = Math.max(anchorId, focusId);
+      const { threads } = this.state;
+      if (!selectionOverlapsThread(startId, endId, threads)) {
+        this.setState({
+          selection: { startId, endId },
+        });
+      }
     } else {
       this.clearSelection();
     }
