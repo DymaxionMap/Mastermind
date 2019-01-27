@@ -11,5 +11,10 @@ app.get('/articles/:id', (req, res) => {
   res.send(exampleData.articles[0]);
 });
 
+app.post('/articles/:id/threads', (req, res) => {
+  console.log(req.body);
+  res.sendStatus(201);
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Article from './components/Article';
+import Discussion from './components/Discussion';
 
 class App extends Component {
   constructor(props) {
@@ -15,16 +16,23 @@ class App extends Component {
     };
 
     this.getSelection = this.getSelection.bind(this);
+    this.createThread = this.createThread.bind(this);
   }
 
   componentDidMount() {
     fetch('/articles/1')
-      .then(data => data.json())
+      .then(response => response.json())
       .then((article) => {
         const { title, words } = article;
         this.setState({
           title,
-          words: words.map(word => Object.assign({ isSelected: false }, word)),
+          words: words.map(word => Object.assign(
+            {
+              isSelected: false,
+              threadId: null,
+            },
+            word,
+          )),
         });
       });
   }
@@ -35,7 +43,7 @@ class App extends Component {
       const { words } = this.state;
       const startId = Number(selection.anchorNode.parentElement.id);
       const endId = Number(selection.focusNode.parentElement.id);
-      const highlightedWords = words.map(word => (
+      const wordsWithSelection = words.map(word => (
         (word.id >= startId && word.id <= endId)
           ? { ...word, isSelected: true }
           : { ...word }
@@ -46,15 +54,61 @@ class App extends Component {
           endId,
           text: selection.toString(),
         },
-        words: highlightedWords,
+        words: wordsWithSelection,
       });
+    } else {
+      this.clearSelection();
     }
+  }
+
+  clearSelection() {
+    this.setState({
+      selection: {
+        startId: null,
+        endId: null,
+        text: '',
+      },
+    });
+  }
+
+  createThread() {
+    const { selection } = this.state;
+    const { startId, endId } = selection;
+    console.log(startId);
+    console.log(endId);
+    fetch('/articles/1/threads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ startId, endId }),
+    })
+      .then((response) => {
+        if (response.status === 201) {
+          console.log('Thread created!');
+        } else {
+          console.log('Something went wrong...');
+        }
+        this.clearSelection();
+      })
+      .catch((err) => {
+        console.error(err);
+        this.clearSelection();
+      });
   }
 
   render() {
     const { title, words, selection } = this.state;
     return (
-      <Article title={title} words={words} selection={selection} getSelection={this.getSelection} />
+      <div>
+        <Article
+          title={title}
+          words={words}
+          selection={selection}
+          getSelection={this.getSelection}
+        />
+        <Discussion isSelecting={selection.startId !== null} createThread={this.createThread} />
+      </div>
     );
   }
 }
