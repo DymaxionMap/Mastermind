@@ -6,10 +6,11 @@ const renderWord = word => (
   <Word id={word.id} value={word.value} key={word.id} />
 );
 
-const renderText = (words, threads) => {
+const renderText = (words, threads, getThread) => {
   const components = [];
   let i = 0;
   const threadsCopy = [...threads];
+  threadsCopy.sort((a, b) => a.start - b.start);
   let thread;
   if (threadsCopy.length > 0) {
     thread = threadsCopy.shift();
@@ -17,7 +18,7 @@ const renderText = (words, threads) => {
   while (i < words.length) {
     if (thread && i === thread.start) {
       components.push(
-        <Thread id={thread.id}>
+        <Thread id={thread.id} key={`thread${thread.id}`} getThread={getThread}>
           {words.slice(i, i + thread.end - thread.start + 1).map(renderWord)}
         </Thread>,
       );
@@ -33,11 +34,11 @@ const renderText = (words, threads) => {
   return components;
 };
 
-const Article = ({ title, words, threads, getSelection }) => (
+const Article = ({ title, words, threads, getSelection, getThread }) => (
   <div>
     <h1>{title}</h1>
     <p onMouseUp={getSelection}>
-      {renderText(words, threads)}
+      {renderText(words, threads, getThread)}
     </p>
   </div>
 );

@@ -13,10 +13,12 @@ class App extends Component {
         startId: null,
         endId: null,
       },
+      currentThread: null,
     };
 
     this.getSelection = this.getSelection.bind(this);
     this.createThread = this.createThread.bind(this);
+    this.getThread = this.getThread.bind(this);
   }
 
   componentDidMount() {
@@ -44,16 +46,14 @@ class App extends Component {
     }
   }
 
-  clearSelection() {
-    const { selection } = this.state;
-    if (selection.startId !== null) {
-      this.setState({
-        selection: {
-          startId: null,
-          endId: null,
-        },
-      });
-    }
+  getThread(id) {
+    fetch(`/articles/1/threads/${id}`)
+      .then(response => response.json())
+      .then((thread) => {
+        console.log(thread);
+        this.setState({ currentThread: thread });
+      })
+      .catch(err => console.error(err));
   }
 
   createThread() {
@@ -82,8 +82,20 @@ class App extends Component {
       });
   }
 
+  clearSelection() {
+    const { selection } = this.state;
+    if (selection.startId !== null) {
+      this.setState({
+        selection: {
+          startId: null,
+          endId: null,
+        },
+      });
+    }
+  }
+
   render() {
-    const { title, words, selection, threads } = this.state;
+    const { title, words, selection, threads, currentThread } = this.state;
     return (
       <div>
         <Article
@@ -91,8 +103,9 @@ class App extends Component {
           words={words}
           threads={threads}
           getSelection={this.getSelection}
+          getThread={this.getThread}
         />
-        <Discussion isSelecting={selection.startId !== null} createThread={this.createThread} />
+        <Discussion isSelecting={selection.startId !== null} createThread={this.createThread} thread={currentThread} />
       </div>
     );
   }

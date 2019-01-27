@@ -11,6 +11,12 @@ app.get('/articles/:id', (req, res) => {
   res.send(exampleData.articles[0]);
 });
 
+app.get('/articles/:id/threads/:threadId', (req, res) => {
+  const { threadId } = req.params;
+  console.log(exampleData.articles[0].threads[0]);
+  res.send(exampleData.articles[0].threads[0]);
+});
+
 app.post('/articles/:id/threads', (req, res) => {
   console.log(req.body);
   res.sendStatus(201);

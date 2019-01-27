@@ -7,7 +7,36 @@ module.exports = {
       id: 1,
       title: 'Lorem Ipsum',
       words: words.map((word, i) => ({ id: i, value: word })),
-      threads: [{ id: 1, start: 0, end: 1 }, { id: 2, start: 5, end: 9 }],
+      threads: [
+        {
+          id: 1,
+          start: 0,
+          end: 1,
+          text: 'Lorem ipsum',
+          comments: [
+            {
+              username: 'John Doe',
+              body: 'Nunc quis diam scelerisque, commodo.',
+            },
+            {
+              username: 'Jane Doe',
+              body: 'Donec sollicitudin luctus diam.',
+            },
+          ],
+        },
+        {
+          id: 2,
+          start: 5,
+          end: 9,
+          text: 'consectetur adipiscing elit. Sed erat',
+          comments: [
+            {
+              username: 'Jane Doe',
+              body: 'Morbi et congue justo. Fusce vitae.',
+            },
+          ],
+        },
+      ],
     },
   ],
 };
