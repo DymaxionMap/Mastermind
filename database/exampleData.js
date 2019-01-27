@@ -7,7 +7,7 @@ module.exports = {
       id: 1,
       title: 'Lorem Ipsum',
       words: words.map((word, i) => ({ id: i, value: word })),
-      threads: [],
+      threads: [{ id: 1, start: 0, end: 1 }, { id: 2, start: 5, end: 9 }],
     },
   ],
 };

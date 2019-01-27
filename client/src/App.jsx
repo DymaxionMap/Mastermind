@@ -8,6 +8,7 @@ class App extends Component {
     this.state = {
       title: '',
       words: [],
+      threads: [],
       selection: {
         startId: null,
         endId: null,
@@ -22,8 +23,8 @@ class App extends Component {
     fetch('/articles/1')
       .then(response => response.json())
       .then((article) => {
-        const { title, words } = article;
-        this.setState({ title, words });
+        const { title, words, threads } = article;
+        this.setState({ title, words, threads });
       });
   }
 
@@ -44,12 +45,15 @@ class App extends Component {
   }
 
   clearSelection() {
-    this.setState({
-      selection: {
-        startId: null,
-        endId: null,
-      },
-    });
+    const { selection } = this.state;
+    if (selection.startId !== null) {
+      this.setState({
+        selection: {
+          startId: null,
+          endId: null,
+        },
+      });
+    }
   }
 
   createThread() {
@@ -79,12 +83,13 @@ class App extends Component {
   }
 
   render() {
-    const { title, words, selection } = this.state;
+    const { title, words, selection, threads } = this.state;
     return (
       <div>
         <Article
           title={title}
           words={words}
+          threads={threads}
           getSelection={this.getSelection}
         />
         <Discussion isSelecting={selection.startId !== null} createThread={this.createThread} />
