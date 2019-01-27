@@ -34,8 +34,8 @@ class App extends Component {
       const endId = Number(selection.focusNode.parentElement.id);
       this.setState({
         selection: {
-          startId,
-          endId,
+          startId: Math.min(startId, endId),
+          endId: Math.min(startId, endId),
         },
       });
     } else {
