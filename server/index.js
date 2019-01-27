@@ -13,8 +13,9 @@ app.get('/articles/:id', (req, res) => {
 
 app.get('/articles/:id/threads/:threadId', (req, res) => {
   const { threadId } = req.params;
-  console.log(exampleData.articles[0].threads[0]);
-  res.send(exampleData.articles[0].threads[0]);
+  const { threads } = exampleData.articles[0];
+  const currentThread = threads.find(thread => thread.id === Number(threadId));
+  res.send(currentThread);
 });
 
 app.post('/articles/:id/threads', (req, res) => {
