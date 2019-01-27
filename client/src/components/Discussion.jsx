@@ -1,12 +1,24 @@
 /* eslint react/prefer-stateless-function: 0 */
 import React, { Component } from 'react';
 
+const renderDiscussion = (isSelecting, createThread, currentThread) => {
+  let component;
+  if (isSelecting) {
+    component = <button id="startThread" type="button" onClick={createThread}>Start new thread</button>;
+  } else if (currentThread) {
+    component = <h3>{currentThread.text}</h3>;
+  } else {
+    component = null;
+  }
+  return component;
+};
+
 class Discussion extends Component {
   render() {
-    const { isSelecting, createThread } = this.props;
+    const { isSelecting, createThread, currentThread } = this.props;
     return (
       <div>
-        {(isSelecting) ? <button id="startThread" type="button" onClick={createThread}>Start new thread</button> : null}
+        {renderDiscussion(isSelecting, createThread, currentThread)}
       </div>
     );
   }

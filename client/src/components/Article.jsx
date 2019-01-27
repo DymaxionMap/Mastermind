@@ -34,8 +34,8 @@ const renderText = (words, threads, getThread) => {
   return components;
 };
 
-const Article = ({ title, words, threads, getSelection, getThread }) => (
-  <div>
+const Article = ({ title, words, threads, getSelection, getThread, clearCurrentThread }) => (
+  <div onClick={clearCurrentThread}>
     <h1>{title}</h1>
     <p onMouseUp={getSelection}>
       {renderText(words, threads, getThread)}
