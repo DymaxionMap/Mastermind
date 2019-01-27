@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Article from './components/Article';
-import Discussion from './components/Discussion';
+import Sidebar from './components/Sidebar';
 
 const inBetween = (x, rangeStart, rangeEnd) => x >= rangeStart && x <= rangeEnd;
 
@@ -124,7 +124,7 @@ class App extends Component {
           getThread={this.getThread}
           clearCurrentThread={this.clearCurrentThread}
         />
-        <Discussion
+        <Sidebar
           isSelecting={selection.startId !== null}
           createThread={this.createThread}
           currentThread={currentThread}
