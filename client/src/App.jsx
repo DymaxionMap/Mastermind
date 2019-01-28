@@ -31,6 +31,7 @@ class App extends Component {
     this.getThread = this.getThread.bind(this);
     this.clearSelection = this.clearSelection.bind(this);
     this.clearCurrentThread = this.clearCurrentThread.bind(this);
+    this.getArticle = this.getArticle.bind(this);
   }
 
   componentDidMount() {
@@ -129,6 +130,7 @@ class App extends Component {
           isSelecting={selection.startId !== null}
           createThread={this.createThread}
           currentThread={currentThread}
+          getArticle={this.getArticle}
         />
       </div>
     );
