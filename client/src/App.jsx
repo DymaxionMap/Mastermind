@@ -34,6 +34,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getArticle();
+  }
+
+  getArticle() {
     fetch('/articles/1')
       .then(response => response.json())
       .then((article) => {
@@ -81,6 +85,7 @@ class App extends Component {
       .then((response) => {
         if (response.status === 201) {
           console.log('Thread created!');
+          this.getArticle();
         } else {
           console.log('Something went wrong...');
         }
