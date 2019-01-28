@@ -12,52 +12,36 @@ const articles = [
       {
         start: 0,
         end: 1,
+        text: 'Lorem ipsum',
+        comments: [
+          {
+            username: 'John Doe',
+            body: 'Nunc quis diam scelerisque, commodo.',
+            timestamp: '2019-01-26',
+          },
+          {
+            username: 'Jane Doe',
+            body: 'Donec sollicitudin luctus diam.',
+            timestamp: '2019-01-27',
+          },
+        ],
       },
       {
         start: 5,
         end: 9,
+        text: 'consectetur adipiscing elit. Sed erat',
+        comments: [
+          {
+            username: 'Jane Doe',
+            body: 'Morbi et congue justo. Fusce vitae.',
+            timestamp: '2018-12-14',
+          },
+        ],
       },
     ],
   },
 ];
-
-const threads = [
-  {
-    text: 'Lorem ipsum',
-    comments: [
-      {
-        username: 'John Doe',
-        body: 'Nunc quis diam scelerisque, commodo.',
-        timestamp: '2019-01-26',
-      },
-      {
-        username: 'Jane Doe',
-        body: 'Donec sollicitudin luctus diam.',
-        timestamp: '2019-01-27',
-      },
-    ],
-  },
-  {
-    text: 'consectetur adipiscing elit. Sed erat',
-    comments: [
-      {
-        username: 'Jane Doe',
-        body: 'Morbi et congue justo. Fusce vitae.',
-        timestamp: '2018-12-14',
-      },
-    ],
-  },
-];
-
-// db.Article.find({}).then(data => console.log(data));
-// db.Thread.find({}).then(data => console.log(data));
-// const getArticle = urlId => db.Article.findOne({ urlId });
-// getArticle('1').then(data => console.log(data));
 
 db.Article.insertMany(articles)
   .then(() => db.Article.find({}))
   .then(insertedArticles => console.log(insertedArticles));
-
-db.Thread.insertMany(threads)
-  .then(() => db.Thread.find({}))
-  .then(insertedThreads => console.log(insertedThreads));

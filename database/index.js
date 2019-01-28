@@ -16,32 +16,22 @@ const ArticleSchema = new mongoose.Schema({
   threads: [{
     start: Number,
     end: Number,
-  }],
-});
-
-const ThreadSchema = new mongoose.Schema({
-  text: String,
-  comments: [{
-    username: String,
-    body: String,
-    timestamp: Date,
+    text: String,
+    comments: [{
+      username: String,
+      body: String,
+      timestamp: Date,
+    }],
   }],
 });
 
 const Article = mongoose.model('Article', ArticleSchema);
-const Thread = mongoose.model('Thread', ThreadSchema);
 
 const getArticle = urlId => Article.findOne({ urlId });
 const getAllArticles = () => Article.find({});
 
-const getThread = id => Thread.findById(id);
-const getAllThreads = () => Thread.find({});
-
 module.exports = {
   Article,
-  Thread,
   getArticle,
-  getThread,
   getAllArticles,
-  getAllThreads,
 };
