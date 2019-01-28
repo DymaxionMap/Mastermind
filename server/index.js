@@ -9,7 +9,9 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 app.use(bodyParser.json());
 
 app.get('/articles/:id', (req, res) => {
-  res.send(exampleData.articles[0]);
+  const urlId = req.params.id;
+  db.getArticle(urlId)
+    .then(article => res.send(article));
 });
 
 app.get('/articles/:id/threads/:threadId', (req, res) => {

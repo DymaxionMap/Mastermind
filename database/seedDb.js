@@ -49,6 +49,11 @@ const threads = [
   },
 ];
 
+// db.Article.find({}).then(data => console.log(data));
+// db.Thread.find({}).then(data => console.log(data));
+// const getArticle = urlId => db.Article.findOne({ urlId });
+// getArticle('1').then(data => console.log(data));
+
 db.Article.insertMany(articles)
   .then(() => db.Article.find({}))
   .then(insertedArticles => console.log(insertedArticles));
