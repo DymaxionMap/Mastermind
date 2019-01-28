@@ -47,9 +47,20 @@ const addThread = (urlId, start, end) => (
     })
 );
 
+const addComment = (urlId, threadId, username, body, timestamp) => (
+  getArticle(urlId)
+    .then((article) => {
+      const thread = article.threads.id(threadId);
+      const { comments } = thread;
+      comments.push({ username, body, timestamp });
+      return article.save();
+    })
+);
+
 module.exports = {
   Article,
   getArticle,
   getAllArticles,
   addThread,
+  addComment,
 };

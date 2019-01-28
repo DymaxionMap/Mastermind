@@ -42,12 +42,16 @@ const articles = [
   },
 ];
 
-db.Article.insertMany(articles)
-  .then(() => db.Article.find({}))
-  .then(insertedArticles => console.log(insertedArticles));
+// db.Article.insertMany(articles)
+//   .then(() => db.Article.find({}))
+//   .then(insertedArticles => console.log(insertedArticles));
 
 // db.Article.deleteMany({})
 //   .then(() => db.Article.find({}))
 //   .then(data => console.log(data));
 
 // db.Article.find({}).then(docs => console.log(docs[0].threads));
+
+// db.Article.updateOne({ urlId: '1' }, { threads: [] })
+//   .then(() => db.Article.find({}))
+//   .then(doc => console.log(doc));

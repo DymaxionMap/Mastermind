@@ -27,8 +27,11 @@ app.post('/articles/:id/threads', (req, res) => {
 });
 
 app.post('/articles/:id/threads/:threadId/comments', (req, res) => {
-  console.log(req.body);
-  res.sendStatus(201);
+  const { id: urlId, threadId } = req.params;
+  const { username, body, timestamp } = req.body;
+  db.addComment(urlId, threadId, username, body, timestamp)
+    .then(() => res.sendStatus(201))
+    .catch(() => res.sendStatus(500));
 });
 
 const PORT = 3000;
