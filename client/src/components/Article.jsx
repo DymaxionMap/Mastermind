@@ -18,7 +18,7 @@ const renderText = (words, threads, getThread) => {
   while (i < words.length) {
     if (thread && i === thread.start) {
       components.push(
-        <Thread id={thread.id} key={`thread${thread.id}`} getThread={getThread}>
+        <Thread id={thread._id} key={thread._id} getThread={getThread}>
           {words.slice(i, i + thread.end - thread.start + 1).map(renderWord)}
         </Thread>,
       );
@@ -35,7 +35,9 @@ const renderText = (words, threads, getThread) => {
 };
 
 const Article = ({ title, words, threads, getSelection, getThread, clearCurrentThread }) => (
-  <div onClick={clearCurrentThread}>
+  // TODO: Fix clearCurrentThread
+  // <div onClick={clearCurrentThread}>
+  <div>
     <h1>{title}</h1>
     <p onMouseUp={getSelection}>
       {renderText(words, threads, getThread)}

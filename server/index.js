@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const db = require('../database');
 const exampleData = require('../database/exampleData');
 
 const app = express();
@@ -8,14 +9,9 @@ app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 app.use(bodyParser.json());
 
 app.get('/articles/:id', (req, res) => {
-  res.send(exampleData.articles[0]);
-});
-
-app.get('/articles/:id/threads/:threadId', (req, res) => {
-  const { threadId } = req.params;
-  const { threads } = exampleData.articles[0];
-  const currentThread = threads.find(thread => thread.id === Number(threadId));
-  res.send(currentThread);
+  const urlId = req.params.id;
+  db.getArticle(urlId)
+    .then(article => res.send(article));
 });
 
 app.post('/articles/:id/threads', (req, res) => {

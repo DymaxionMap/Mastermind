@@ -8,11 +8,11 @@ const Discussion = ({ currentThread }) => {
     <div>
       <h3>{text}</h3>
       <ul>
-        {comments.map(({ id, username, body, timestamp }) => (
-          <li key={id}><Comment username={username} body={body} timestamp={timestamp} /></li>
+        {comments.map(({ _id, username, body, timestamp }) => (
+          <li key={_id}><Comment username={username} body={body} timestamp={timestamp} /></li>
         ))}
       </ul>
-      <CommentForm threadId={currentThread.id} />
+      <CommentForm threadId={currentThread._id} />
     </div>
   );
 };
