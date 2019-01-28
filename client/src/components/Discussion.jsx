@@ -2,7 +2,7 @@ import React from 'react';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 
-const Discussion = ({ currentThread }) => {
+const Discussion = ({ currentThread, getArticle }) => {
   const { text, comments } = currentThread;
   return (
     <div>
@@ -12,7 +12,7 @@ const Discussion = ({ currentThread }) => {
           <li key={_id}><Comment username={username} body={body} timestamp={timestamp} /></li>
         ))}
       </ul>
-      <CommentForm threadId={currentThread._id} />
+      <CommentForm threadId={currentThread._id} getArticle={getArticle} />
     </div>
   );
 };

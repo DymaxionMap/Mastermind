@@ -31,9 +31,14 @@ class App extends Component {
     this.getThread = this.getThread.bind(this);
     this.clearSelection = this.clearSelection.bind(this);
     this.clearCurrentThread = this.clearCurrentThread.bind(this);
+    this.getArticle = this.getArticle.bind(this);
   }
 
   componentDidMount() {
+    this.getArticle();
+  }
+
+  getArticle() {
     fetch('/articles/1')
       .then(response => response.json())
       .then((article) => {
@@ -76,11 +81,12 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ startId, endId }),
+      body: JSON.stringify({ start: startId, end: endId }),
     })
       .then((response) => {
         if (response.status === 201) {
           console.log('Thread created!');
+          this.getArticle();
         } else {
           console.log('Something went wrong...');
         }
@@ -124,6 +130,7 @@ class App extends Component {
           isSelecting={selection.startId !== null}
           createThread={this.createThread}
           currentThread={currentThread}
+          getArticle={this.getArticle}
         />
       </div>
     );

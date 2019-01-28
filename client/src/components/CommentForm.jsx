@@ -17,6 +17,7 @@ class CommentForm extends Component {
 
   clickHandler(threadId) {
     const { username, body } = this.state;
+    const { getArticle } = this.props;
     fetch(`/articles/1/threads/${threadId}/comments`, {
       method: 'POST',
       headers: {
@@ -31,6 +32,7 @@ class CommentForm extends Component {
       .then((request) => {
         if (request.status === 201) {
           console.log('Created comment!');
+          getArticle();
         } else {
           console.error('Something bad happened...');
         }
