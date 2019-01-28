@@ -1,12 +1,13 @@
 /* eslint react/prefer-stateless-function: 0 */
 import React, { Component } from 'react';
+import Discussion from './Discussion';
 
 const renderSidebar = (isSelecting, createThread, currentThread) => {
   let component;
   if (isSelecting) {
     component = <button id="startThread" type="button" onClick={createThread}>Start new thread</button>;
   } else if (currentThread) {
-    component = <h3>{currentThread.text}</h3>;
+    component = <Discussion currentThread={currentThread} />;
   } else {
     component = null;
   }

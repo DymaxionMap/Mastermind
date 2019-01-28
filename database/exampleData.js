@@ -15,12 +15,16 @@ module.exports = {
           text: 'Lorem ipsum',
           comments: [
             {
+              id: 1,
               username: 'John Doe',
               body: 'Nunc quis diam scelerisque, commodo.',
+              timestamp: '2019-01-26',
             },
             {
+              id: 2,
               username: 'Jane Doe',
               body: 'Donec sollicitudin luctus diam.',
+              timestamp: '2019-01-27',
             },
           ],
         },
@@ -31,8 +35,10 @@ module.exports = {
           text: 'consectetur adipiscing elit. Sed erat',
           comments: [
             {
+              id: 3,
               username: 'Jane Doe',
               body: 'Morbi et congue justo. Fusce vitae.',
+              timestamp: '2018-12-14',
             },
           ],
         },
