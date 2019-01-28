@@ -61,13 +61,9 @@ class App extends Component {
   }
 
   getThread(id) {
-    fetch(`/articles/1/threads/${id}`)
-      .then(response => response.json())
-      .then((thread) => {
-        console.log('Fetched thread:', thread);
-        this.setState({ currentThread: thread });
-      })
-      .catch(err => console.error(err));
+    const { threads } = this.state;
+    const currentThread = threads.find(thread => thread._id === id);
+    this.setState({ currentThread });
   }
 
   createThread() {
