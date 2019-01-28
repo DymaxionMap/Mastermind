@@ -30,8 +30,26 @@ const Article = mongoose.model('Article', ArticleSchema);
 const getArticle = urlId => Article.findOne({ urlId });
 const getAllArticles = () => Article.find({});
 
+const addThread = (urlId, start, end) => (
+  getArticle(urlId)
+    .then((article) => {
+      const { words } = article;
+      const text = words.slice(start, end + 1).map(word => word.value).join(' ');
+      const thread = {
+        start,
+        end,
+        text,
+        comments: [],
+      };
+      return Article.findByIdAndUpdate(article._id,
+        { $push: { threads: thread } },
+        { new: true });
+    })
+);
+
 module.exports = {
   Article,
   getArticle,
   getAllArticles,
+  addThread,
 };

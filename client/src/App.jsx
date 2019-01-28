@@ -76,7 +76,7 @@ class App extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ startId, endId }),
+      body: JSON.stringify({ start: startId, end: endId }),
     })
       .then((response) => {
         if (response.status === 201) {
