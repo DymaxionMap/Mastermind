@@ -14,13 +14,6 @@ app.get('/articles/:id', (req, res) => {
     .then(article => res.send(article));
 });
 
-app.get('/articles/:id/threads/:threadId', (req, res) => {
-  const { threadId } = req.params;
-  const { threads } = exampleData.articles[0];
-  const currentThread = threads.find(thread => thread.id === Number(threadId));
-  res.send(currentThread);
-});
-
 app.post('/articles/:id/threads', (req, res) => {
   console.log(req.body);
   res.sendStatus(201);
