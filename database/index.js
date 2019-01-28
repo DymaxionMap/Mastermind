@@ -41,9 +41,8 @@ const addThread = (urlId, start, end) => (
         text,
         comments: [],
       };
-      return Article.findByIdAndUpdate(article._id,
-        { $push: { threads: thread } },
-        { new: true });
+      article.threads.push(thread);
+      return article.save();
     })
 );
 
