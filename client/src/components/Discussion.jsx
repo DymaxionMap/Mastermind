@@ -1,5 +1,6 @@
 import React from 'react';
 import Comment from './Comment';
+import CommentForm from './CommentForm';
 
 const Discussion = ({ currentThread }) => {
   const { text, comments } = currentThread;
@@ -11,6 +12,7 @@ const Discussion = ({ currentThread }) => {
           <li key={id}><Comment username={username} body={body} timestamp={timestamp} /></li>
         ))}
       </ul>
+      <CommentForm threadId={currentThread.id} />
     </div>
   );
 };

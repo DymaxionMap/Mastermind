@@ -23,5 +23,10 @@ app.post('/articles/:id/threads', (req, res) => {
   res.sendStatus(201);
 });
 
+app.post('/articles/:id/threads/:threadId/comments', (req, res) => {
+  console.log(req.body);
+  res.sendStatus(201);
+});
+
 const PORT = 3000;
 app.listen(PORT, () => console.log(`Listening on http://localhost:${PORT}`));
