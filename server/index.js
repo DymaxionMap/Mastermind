@@ -17,8 +17,8 @@ app.post('/articles/:id/threads', (req, res) => {
   const urlId = req.params.id;
   const { start, end } = req.body;
   db.addThread(urlId, start, end)
-    .then(() => {
-      res.sendStatus(201);
+    .then((newThreadId) => {
+      res.status(201).send({ newThreadId });
     })
     .catch((err) => {
       console.error(err);
@@ -30,8 +30,11 @@ app.post('/articles/:id/threads/:threadId/comments', (req, res) => {
   const { id: urlId, threadId } = req.params;
   const { username, body, timestamp } = req.body;
   db.addComment(urlId, threadId, username, body, timestamp)
-    .then(() => res.sendStatus(201))
-    .catch(() => res.sendStatus(500));
+    .then(modifiedThreadId => res.status(201).send({ modifiedThreadId }))
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
 });
 
 const PORT = 3000;

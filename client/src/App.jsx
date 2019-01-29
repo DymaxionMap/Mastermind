@@ -38,12 +38,12 @@ class App extends Component {
     this.getArticle();
   }
 
-  getArticle() {
+  getArticle(cb = () => {}) {
     fetch('/articles/1')
       .then(response => response.json())
       .then((article) => {
         const { title, words, threads } = article;
-        this.setState({ title, words, threads });
+        this.setState({ title, words, threads }, cb);
       });
   }
 
@@ -84,13 +84,16 @@ class App extends Component {
       body: JSON.stringify({ start: startId, end: endId }),
     })
       .then((response) => {
-        if (response.status === 201) {
-          console.log('Thread created!');
-          this.getArticle();
-        } else {
-          console.log('Something went wrong...');
+        if (response.status !== 201) {
+          throw Error('Something went wrong...');
         }
-        this.clearSelection();
+        return response.json();
+      })
+      .then(({ newThreadId }) => {
+        this.getArticle(() => {
+          this.clearSelection();
+          this.getThread(newThreadId);
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -131,6 +134,9 @@ class App extends Component {
           createThread={this.createThread}
           currentThread={currentThread}
           getArticle={this.getArticle}
+          getThread={this.getThread}
+          clearCurrentThread={this.clearCurrentThread}
+          clearSelection={this.clearSelection}
         />
       </div>
     );
