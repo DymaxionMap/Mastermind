@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import Button from './Button';
 
 const Container = styled.div`
+  width: 100%;
   min-height: 10rem;
   display: flex;
+  justify-content: center;
   align-items: center;
 `;
 

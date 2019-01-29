@@ -5,7 +5,8 @@ import Sidebar from './components/Sidebar';
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 3fr;
+  padding: 0 3rem;
   font-family: Garamond, Georgia, serif;
 `;
 

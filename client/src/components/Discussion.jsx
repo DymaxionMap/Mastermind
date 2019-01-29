@@ -4,7 +4,7 @@ import Comment from './Comment';
 import CommentForm from './CommentForm';
 
 const Container = styled.div`
-  width: 80%;
+  width: 100%;
 `;
 
 const Text = styled.h3`
