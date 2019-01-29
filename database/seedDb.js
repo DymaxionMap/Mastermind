@@ -1,6 +1,6 @@
 const db = require('./index');
 
-const text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed erat ante, blandit sit amet maximus vitae, elementum eu sem. Nulla volutpat ornare volutpat. Donec id ex vestibulum, scelerisque leo at, ullamcorper ligula. Duis sodales ex sed quam facilisis interdum. Integer sed fermentum orci. Vestibulum consequat justo ac orci gravida scelerisque. Ut accumsan facilisis purus quis vestibulum. Mauris luctus nisi tincidunt, finibus ligula eget, tempus purus. Nam libero nulla, mollis sit amet augue eget, tristique cursus massa. Etiam a dapibus justo.';
+const text = 'Lorem ipsum dolor sit amet, sed ad inani evertitur, alia meis solum sea te. Has dicta legere no, omnes sapientem te ius. Sale scripta mandamus ei pri, sit cu commodo molestie posidonium, eu nam tritani recusabo. Mea dicat solet complectitur in, quaeque maiorum complectitur has et, inermis instructior in cum. Cu hinc consul eum, propriae rationibus cu mel. Prompta albucius offendit pri no, est id paulo placerat. No cum commune explicari. At eum nostro fabulas, denique conceptam ex mea. Et mea omnium prompta, mea no postea accusamus interesset, ad albucius persequeris dissentiunt quo. Eam ad animal blandit definiebas. Sed et feugait vivendo.Enim iuvaret cum an. Nam fabulas scaevola convenire te, saepe liberavisse mea an, est hinc aliquam dissentiet ut. Eu iriure probatus voluptatibus cum. Minimum intellegebat in ius, qui ut ridens lucilius eleifend. Qui solum mentitum ne, eu pro vidisse albucius. Ne qui expetenda dissentiunt, populo labitur definiebas nam ne, vel alienum pericula cu. Te sit verterem maiestatis, vel.';
 const words = text.split(/\s/);
 
 const articles = [
@@ -24,6 +24,11 @@ const articles = [
             body: 'Donec sollicitudin luctus diam.',
             timestamp: '2019-01-27',
           },
+          {
+            username: 'Stephen',
+            body: 'Einstein figured this out: $$ E=mc^2 $$',
+            timestamp: '2019-01-28',
+          },
         ],
       },
       {
@@ -36,22 +41,20 @@ const articles = [
             body: 'Morbi et congue justo. Fusce vitae.',
             timestamp: '2018-12-14',
           },
+          {
+            username: 'Stephen',
+            body: '$$ \\int_0^\\infty x^2 dx $$ Integrals are cool.',
+            timestamp: '2019-01-28',
+          },
         ],
       },
     ],
   },
 ];
 
-// db.Article.insertMany(articles)
-//   .then(() => db.Article.find({}))
-//   .then(insertedArticles => console.log(insertedArticles));
-
-// db.Article.deleteMany({})
-//   .then(() => db.Article.find({}))
-//   .then(data => console.log(data));
-
-// db.Article.find({}).then(docs => console.log(docs[0].threads));
-
-// db.Article.updateOne({ urlId: '1' }, { threads: [] })
-//   .then(() => db.Article.find({}))
-//   .then(doc => console.log(doc));
+db.Article.deleteMany({})
+  .then(() => db.Article.find({}))
+  .then(data => console.log(data))
+  .then(() => db.Article.insertMany(articles))
+  .then(() => db.Article.find({}))
+  .then(insertedArticles => console.log(insertedArticles));
