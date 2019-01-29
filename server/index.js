@@ -37,5 +37,5 @@ app.post('/articles/:id/threads/:threadId/comments', (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 80;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
