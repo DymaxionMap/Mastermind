@@ -1,6 +1,11 @@
 /* eslint react/prefer-stateless-function: 0 */
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Discussion from './Discussion';
+
+const Container = styled.div`
+  padding: 1.5em;
+`;
 
 const renderSidebar = (isSelecting, createThread, currentThread, getArticle, getThread, clearCurrentThread, clearSelection) => {
   let component;
@@ -18,9 +23,9 @@ class Sidebar extends Component {
   render() {
     const { isSelecting, createThread, currentThread, getArticle, getThread, clearCurrentThread, clearSelection } = this.props;
     return (
-      <div>
+      <Container>
         {renderSidebar(isSelecting, createThread, currentThread, getArticle, getThread, clearCurrentThread, clearSelection)}
-      </div>
+      </Container>
     );
   }
 }
