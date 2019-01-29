@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
+import styled, { createGlobalStyle } from 'styled-components';
 import Article from './components/Article';
 import Sidebar from './components/Sidebar';
+import Nav from './components/Nav';
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    @import url('https://fonts.googleapis.com/css?family=Montserrat');
+  }
+`;
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  padding: 0 3rem;
+  font-family: Garamond, Georgia, serif;
+`;
 
 const inBetween = (x, rangeStart, rangeEnd) => x >= rangeStart && x <= rangeEnd;
 
@@ -121,23 +136,27 @@ class App extends Component {
     const { title, words, selection, threads, currentThread } = this.state;
     return (
       <div>
-        <Article
-          title={title}
-          words={words}
-          threads={threads}
-          getSelection={this.getSelection}
-          getThread={this.getThread}
-          clearCurrentThread={this.clearCurrentThread}
-        />
-        <Sidebar
-          isSelecting={selection.startId !== null}
-          createThread={this.createThread}
-          currentThread={currentThread}
-          getArticle={this.getArticle}
-          getThread={this.getThread}
-          clearCurrentThread={this.clearCurrentThread}
-          clearSelection={this.clearSelection}
-        />
+        <GlobalStyle />
+        <Nav />
+        <Container>
+          <Article
+            title={title}
+            words={words}
+            threads={threads}
+            getSelection={this.getSelection}
+            getThread={this.getThread}
+            clearCurrentThread={this.clearCurrentThread}
+          />
+          <Sidebar
+            isSelecting={selection.startId !== null}
+            createThread={this.createThread}
+            currentThread={currentThread}
+            getArticle={this.getArticle}
+            getThread={this.getThread}
+            clearCurrentThread={this.clearCurrentThread}
+            clearSelection={this.clearSelection}
+          />
+        </Container>
       </div>
     );
   }

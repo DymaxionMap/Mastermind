@@ -1,4 +1,41 @@
+/* eslint react/self-closing-comp: 0 */
 import React, { Component } from 'react';
+import styled from 'styled-components';
+import Button from './Button';
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  border-top: thin solid gray;
+  padding-top: 2rem;
+`;
+
+const Label = styled.label`
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+`;
+
+const Input = styled.input`
+  max-width: 10rem;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border: thin solid gray;
+  border-radius: 0.2rem;
+  margin-bottom: 0.5rem;
+`;
+
+const TextArea = styled.textarea`
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-size: 0.9rem;
+  border: thin solid gray;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  min-height: 6rem;
+  margin-bottom: 0.5rem;
+`;
 
 class CommentForm extends Component {
   constructor(props) {
@@ -49,17 +86,13 @@ class CommentForm extends Component {
   render() {
     const { threadId } = this.props;
     return (
-      <form>
-        <label htmlFor="username">
-          Username
-          <input id="username" type="text" onChange={e => this.changeHandler(e, 'username')} />
-        </label>
-        <label htmlFor="body">
-          Comment
-          <input id="body" type="textarea" onChange={e => this.changeHandler(e, 'body')} />
-        </label>
-        <button type="button" onClick={() => this.clickHandler(threadId)}>Submit</button>
-      </form>
+      <Form>
+        <Label htmlFor="username">Username</Label>
+        <Input id="username" type="text" onChange={e => this.changeHandler(e, 'username')} data-lpignore="true" />
+        <Label htmlFor="body">Comment</Label>
+        <TextArea id="body" onChange={e => this.changeHandler(e, 'body')}></TextArea>
+        <Button type="button" onClick={() => this.clickHandler(threadId)}>Submit</Button>
+      </Form>
     );
   }
 }

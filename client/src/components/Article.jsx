@@ -1,6 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import Word from './Word';
 import Thread from './Thread';
+
+const Container = styled.div`
+  padding: 0.5rem 0;
+`;
+
+const Title = styled.h1`
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  margin-top: 0;
+`;
+
+const Body = styled.p`
+  font-size: 1.1rem;
+`;
 
 const renderWord = word => (
   <Word id={word.id} value={word.value} key={word.id} />
@@ -37,12 +51,12 @@ const renderText = (words, threads, getThread) => {
 const Article = ({ title, words, threads, getSelection, getThread, clearCurrentThread }) => (
   // TODO: Fix clearCurrentThread
   // <div onClick={clearCurrentThread}>
-  <div>
-    <h1>{title}</h1>
-    <p onMouseUp={getSelection}>
+  <Container>
+    <Title>{title}</Title>
+    <Body onMouseUp={getSelection}>
       {renderText(words, threads, getThread)}
-    </p>
-  </div>
+    </Body>
+  </Container>
 );
 
 export default Article;
