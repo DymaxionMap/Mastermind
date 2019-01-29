@@ -44,6 +44,10 @@ const addThread = (urlId, start, end) => (
       article.threads.push(thread);
       return article.save();
     })
+    .then((article) => {
+      const newThreadId = article.threads.slice(-1)._id;
+      return newThreadId;
+    })
 );
 
 const addComment = (urlId, threadId, username, body, timestamp) => (
@@ -53,6 +57,10 @@ const addComment = (urlId, threadId, username, body, timestamp) => (
       const { comments } = thread;
       comments.push({ username, body, timestamp });
       return article.save();
+    })
+    .then((article) => {
+      const idModifiedThread = article.threads.slice(-1)._id;
+      return idModifiedThread;
     })
 );
 
