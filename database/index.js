@@ -3,9 +3,9 @@ mongoose.Promise = require('bluebird');
 
 const uri = process.env.MONGODB_URI || 'mongodb://localhost/mastermind';
 mongoose.connect(uri, { useNewUrlParser: true });
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', () => console.log('Connected to MongoDB'));
+const conn = mongoose.connection;
+conn.on('error', console.error.bind(console, 'connection error:'));
+conn.once('open', () => console.log('Connected to MongoDB'));
 
 const ArticleSchema = new mongoose.Schema({
   urlId: String,
@@ -71,4 +71,5 @@ module.exports = {
   getAllArticles,
   addThread,
   addComment,
+  conn,
 };

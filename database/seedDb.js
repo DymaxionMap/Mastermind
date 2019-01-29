@@ -58,4 +58,4 @@ db.Article.deleteMany({})
   .then(() => db.Article.insertMany(articles))
   .then(() => db.Article.find({}))
   .then(insertedArticles => console.log(insertedArticles))
-  .then(() => db.close());
+  .then(() => db.conn.close());
