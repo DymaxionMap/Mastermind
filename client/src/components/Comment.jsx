@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import { BlockMath } from 'react-katex';
 import '../katex.min.css';
 
@@ -19,7 +20,7 @@ const Username = styled.h4`
 
 const Time = styled.time`
   color: gray;
-  font-size: 1rem;
+  font-size: 0.9rem;
 `;
 
 const Body = styled.div`
@@ -51,7 +52,7 @@ const Comment = ({ username, body, timestamp }) => (
   <Container>
     <Header>
       <Username>{username}</Username>
-      <Time>{timestamp}</Time>
+      <Time>{moment(timestamp).fromNow()}</Time>
     </Header>
     <Body>{renderBody(body)}</Body>
   </Container>
