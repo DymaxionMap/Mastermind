@@ -9,6 +9,7 @@ const Container = styled.div`
 
 const Title = styled.h1`
   font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  margin-top: 0;
 `;
 
 const Body = styled.p`

@@ -10,6 +10,7 @@ const Container = styled.div`
 const Text = styled.h3`
   font-style: italic;
   font-weight: normal;
+  margin-top: 0;
   margin-bottom: 3rem;
 `;
 
