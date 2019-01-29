@@ -9,6 +9,8 @@
     "build-prod": "webpack --mode=production",
     "build-dev": "webpack --mode=development --watch",
     "seed": "node database/seedDb.js",
+    "heroku-postbuild": "webpack -p",
+    "copy-html": "cp ./index.html client/dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
