@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar';
 const Container = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+  font-family: Garamond, Georgia, serif;
 `;
 
 const inBetween = (x, rangeStart, rangeEnd) => x >= rangeStart && x <= rangeEnd;

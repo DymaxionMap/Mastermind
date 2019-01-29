@@ -1,9 +1,25 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const StyledThread = styled.a`
+  text-decoration: none;
+  background-color: #dddddd;
+  color: black;
+  cursor: pointer;
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:hover {
+    background-color: yellow;
+  }
+`;
 
 const Thread = ({ id, getThread, children }) => (
-  <a href="#" onClick={() => getThread(id)}>
+  <StyledThread onClick={() => getThread(id)}>
     {children}
-  </a>
+  </StyledThread>
 );
 
 export default Thread;
