@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 
-mongoose.connect('mongodb://localhost/mastermind', { useNewUrlParser: true });
+const uri = process.env.MONGODB_URI || 'mongodb://localhost/mastermind';
+mongoose.connect(uri, { useNewUrlParser: true });
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => console.log('Connected to MongoDB'));
