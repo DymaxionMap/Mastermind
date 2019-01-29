@@ -1,6 +1,7 @@
 /* eslint react/self-closing-comp: 0 */
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Button from './Button';
 
 const Form = styled.form`
   display: flex;
@@ -34,21 +35,6 @@ const TextArea = styled.textarea`
   padding: 0.5rem;
   min-height: 6rem;
   margin-bottom: 0.5rem;
-`;
-
-const Button = styled.button`
-  font-family: 'Helvetica Neue', 'Arial', sans-serif;
-  font-size: 1rem;
-  font-weight: bold;
-  padding: 0.5rem;
-  border: thin solid gray;
-  border-radius: 0.2rem;
-  max-width: 6rem;
-
-  &:hover {
-    color: white;
-    background-color: black;
-  }
 `;
 
 class CommentForm extends Component {
