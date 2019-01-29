@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 import Article from './components/Article';
 import Sidebar from './components/Sidebar';
+
+const Container = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-family: 'Helvetica Neue', 'Arial', sans-serif;
+`;
 
 const inBetween = (x, rangeStart, rangeEnd) => x >= rangeStart && x <= rangeEnd;
 
@@ -120,7 +127,7 @@ class App extends Component {
   render() {
     const { title, words, selection, threads, currentThread } = this.state;
     return (
-      <div>
+      <Container>
         <Article
           title={title}
           words={words}
@@ -138,7 +145,7 @@ class App extends Component {
           clearCurrentThread={this.clearCurrentThread}
           clearSelection={this.clearSelection}
         />
-      </div>
+      </Container>
     );
   }
 }
